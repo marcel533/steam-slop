@@ -172,7 +172,7 @@ Bei nicht kuratierten Spielen fließen ein:
 
 Anleitung zum Starten steht in [USE.md](USE.md). Verwendet werden die üblichen Next.js-Befehle (`npm install`, danach das `dev`-/`build`-Skript aus der `package.json`) – bitte an die tatsächlichen Skripte im Repo anpassen.
 
-Vor dem Start ins Projektverzeichnis entpacken – siehe [USE.md](USE.md).
+Vor dem Start ins homeverzeichnis entpacken – siehe [USE.md](USE.md).
 
 ### Credits
 
