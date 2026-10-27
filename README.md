@@ -85,8 +85,6 @@ For non-curated games, the estimate draws on:
 
 Setup and run instructions live in [USE.md](USE.md). The commands are the usual Next.js ones (`npm install`, then the `dev` / `build` script from `package.json`) — adjust to match the scripts actually defined in this repo.
 
-Unzip it into the project root before running the app — see [USE.md](USE.md).
-
 ### Credits
 
 Created by **marcel533**. Game data and images belong to Valve, Steam, and the respective developers.
@@ -171,8 +169,6 @@ Bei nicht kuratierten Spielen fließen ein:
 ### Erste Schritte
 
 Anleitung zum Starten steht in [USE.md](USE.md). Verwendet werden die üblichen Next.js-Befehle (`npm install`, danach das `dev`-/`build`-Skript aus der `package.json`) – bitte an die tatsächlichen Skripte im Repo anpassen.
-
-Vor dem Start ins homeverzeichnis entpacken – siehe [USE.md](USE.md).
 
 ### Credits
 
