@@ -1,111 +1,177 @@
 # Steam Slop
 
+**How much of a Steam game is AI-generated?** Enter a title, get a slop score.
+
 [English](#english) | [Deutsch](#deutsch)
 
-How to run it: see [USE.md](USE.md).
+> **Running the app:** see [USE.md](USE.md).
 
 ---
 
 <a id="english"></a>
 
-# English
+## English
 
-A satirical but practical web app that helps you judge whether a Steam game leans on AI-generated assets ("AI slop"). Search any game on Steam, get a slop score with a breakdown, the evidence behind it, and a link to the Steam page.
+A web app that estimates how heavily a Steam game relies on AI-generated assets — a "slop score" from 0–100%, a category breakdown, the evidence behind the number, and a link to the store page.
 
-## Features
+### Contents
 
-- **Live search** across all Steam games: cover, developer and release date, with keyboard-accessible autocomplete.
-- **Slop score** from 0 to 100% with a verdict: AI slop, Mixed or Legitimate.
-- **Breakdown** into store art and capsule images, descriptions and patch notes, and asset-flip signals.
-- **Evidence list** of the flags that led to the score.
-- **Community verdict** with votes, a sample quote and tags (curated entries only).
-- **Steam link** on every game page.
-- **EN | DE** language switch, dark theme, responsive layout, reduced-motion support.
+- [Features](#features)
+- [How the score works](#how-the-score-works)
+- [Scoring weights](#scoring-weights)
+- [Estimation signals](#estimation-signals)
+- [Limitations](#limitations)
+- [Tech stack](#tech-stack)
+- [Getting started](#getting-started)
+- [Credits](#credits)
 
-## How the score works
+### Features
 
-There are two kinds of entries:
+| Feature | Description |
+| --- | --- |
+| **Live search** | Query every game on Steam, with cover art, developer and release date. Fully keyboard-navigable autocomplete. |
+| **Slop score** | 0–100%, classified as *AI Slop*, *Mixed*, or *Legitimate*. |
+| **Breakdown** | Per-category detail for store/capsule graphics, text & patch notes, and asset flips. |
+| **Evidence list** | The specific signals that produced the score. |
+| **Community consensus** | Votes, example quotes and tags — curated entries only. |
+| **Steam link** | Jump straight to the store page from any game view. |
+| **Bilingual UI** | EN \| DE toggle, dark-mode design. |
 
-1. **Curated entries** (home page): scores based on publicly known statements, such as AI use disclosed by the developer.
-2. **Any other Steam game**: an automatic estimate from public store data:
-   - stock LLM phrases in the store description
-   - no developer website or support contact
-   - very few user reviews
-   - a very low price
-   - Steam's "AI Generated Content Disclosure" on the store page (best effort)
+### How the score works
 
-The overall score is a weighted average of the categories that could be measured (art 40%, text 30%, asset flip 30%). Images are **not** analyzed, so store art shows "n/a" unless the developer disclosed AI use.
+Entries come from two sources:
 
-## Limitations
+1. **Curated entries** (homepage) — scored from publicly known information, such as AI usage disclosed by the developer.
+2. **Every other Steam game** — automatically estimated from public store data (see below).
 
-The score is an indicator, not proof of how a game was made. It can be wrong in both directions. Do not use it to accuse a studio or developer. Community data exists only for curated entries; real community reports would need a database.
+The overall score is a weighted average of the measurable categories.
 
-## Tech stack
+### Scoring weights
 
-- Next.js 15 (App Router), React 19
-- Tailwind CSS 3
-- Lucide React (icons)
-- GSAP with `@gsap/react` (hero entrance and score count-up, disabled for reduced motion)
+| Category | Weight | Notes |
+| --- | --- | --- |
+| Store & capsule graphics | 40% | Images are **not** analysed, so this reads `n/a` unless the developer explicitly disclosed AI use. |
+| Store text & patch notes | 30% | Looks for LLM-typical phrasing. |
+| Asset flips | 30% | Indicators of reused or repackaged assets. |
 
-Steam requests run in server routes, because browsers cannot call Steam directly (CORS). No API key is needed.
+### Estimation signals
 
-## AI disclosure
+For non-curated games, the estimate draws on:
 
-This project is fully generated with AI, because it is so difficult to build this by hand.
+- LLM-typical phrasing in the store description
+- No developer website or support contact
+- Very few user reviews
+- An unusually low price
+- Steam's own "AI Generated Content Disclosure", where present *(best-effort, no guarantee)*
 
-## Credits
+### Limitations
 
-Created by marcel533. Game data and images belong to Valve, Steam and the respective developers.
+> ⚠️ **The score is an indicator, not proof.** It can be wrong in either direction.
+
+- Do not use it to accuse a studio or developer.
+- Community-contributed data exists only for curated entries; real community reporting would require a dedicated database.
+
+### Tech stack
+
+| Layer | Choice |
+| --- | --- |
+| Framework | Next.js 15 (App Router) |
+| UI | React 19, Tailwind CSS 3 |
+| Icons | Lucide React |
+| Animation | GSAP + `@gsap/react` (hero reveal and score counter; disabled under reduced-motion settings) |
+| Data | Steam requests proxied through server routes (browser CORS restriction). **No API key required.** |
+
+### Getting started
+
+Setup and run instructions live in [USE.md](USE.md). The commands are the usual Next.js ones (`npm install`, then the `dev` / `build` script from `package.json`) — adjust to match the scripts actually defined in this repo.
+
+### Credits
+
+Created by **marcel533**. Game data and images belong to Valve, Steam, and the respective developers.
+
+**AI note:** this project was generated entirely using AI.
 
 ---
 
 <a id="deutsch"></a>
 
-# Deutsch
+## Deutsch
 
-Eine satirische, aber praktische Web-App, die einschätzen hilft, ob ein Steam-Spiel stark auf KI-generierte Assets ("KI-Slop") setzt. Suche ein beliebiges Steam-Spiel und erhalte einen Slop-Wert mit Aufschlüsselung, den dahinterliegenden Belegen und einem Link zur Steam-Seite.
+Eine Web-App, die einschätzt, wie stark ein Steam-Spiel auf KI-generierte Assets setzt. Gib einen Titel ein und du erhältst einen Slop-Wert mit Aufschlüsselung, den zugrunde liegenden Belegen und einem Link zur Steam-Seite.
 
-## Funktionen
+### Inhalt
 
-- **Live-Suche** über alle Steam-Spiele: Cover, Entwickler und Erscheinungsdatum, mit per Tastatur bedienbarer Autovervollständigung.
-- **Slop-Wert** von 0 bis 100 % mit Urteil: KI-Slop, Gemischt oder Legitim.
-- **Aufschlüsselung** in Store-Grafiken und Kapselbilder, Beschreibungen und Patchnotes sowie Asset-Flip-Hinweise.
-- **Belege-Liste** mit den Hinweisen, die zum Wert geführt haben.
-- **Community-Urteil** mit Stimmen, Beispielzitat und Tags (nur bei kuratierten Einträgen).
-- **Steam-Link** auf jeder Spielseite.
-- **EN | DE** Sprachwechsel, dunkles Design, responsives Layout, Unterstützung für reduzierte Bewegung.
+- [Funktionen](#funktionen)
+- [So entsteht der Wert](#so-entsteht-der-wert)
+- [Gewichtung](#gewichtung)
+- [Signale der Schätzung](#signale-der-schätzung)
+- [Grenzen](#grenzen)
+- [Technik](#technik)
+- [Erste Schritte](#erste-schritte)
+- [Credits](#credits-1)
 
-## So entsteht der Wert
+### Funktionen
+
+| Funktion | Beschreibung |
+| --- | --- |
+| **Live-Suche** | Durchsucht alle Steam-Spiele inklusive Cover, Entwickler und Erscheinungsdatum – mit per Tastatur bedienbarer Autovervollständigung. |
+| **Slop-Wert** | 0 bis 100 % mit Urteil: *KI-Slop*, *Gemischt* oder *Legitim*. |
+| **Aufschlüsselung** | Getrennt nach Store-Grafiken und Kapselbildern, Beschreibungen und Patchnotes sowie Asset-Flip-Hinweisen. |
+| **Belege** | Die konkreten Hinweise, die zum Wert geführt haben. |
+| **Community-Urteil** | Stimmen, Beispielzitat und Tags – nur bei kuratierten Einträgen. |
+| **Steam-Link** | Direkt zur Store-Seite aus jeder Spielansicht. |
+| **Zweisprachig** | EN \| DE Umschalter, dunkles Design. |
+
+### So entsteht der Wert
 
 Es gibt zwei Arten von Einträgen:
 
-1. **Kuratierte Einträge** (Startseite): Werte auf Basis öffentlich bekannter Angaben, etwa von Entwicklern offengelegte KI-Nutzung.
-2. **Jedes andere Steam-Spiel**: eine automatische Schätzung aus öffentlichen Store-Daten:
-   - typische LLM-Floskeln in der Store-Beschreibung
-   - keine Entwickler-Website oder kein Support-Kontakt
-   - sehr wenige Nutzerreviews
-   - ein sehr niedriger Preis
-   - Steams "AI Generated Content Disclosure" auf der Store-Seite (Versuch, ohne Garantie)
+1. **Kuratierte Einträge** (Startseite) – Werte auf Basis öffentlich bekannter Angaben, etwa von Entwicklern offengelegter KI-Nutzung.
+2. **Alle anderen Steam-Spiele** – automatische Schätzung aus öffentlichen Store-Daten (siehe unten).
 
-Der Gesamtwert ist ein gewichteter Durchschnitt der messbaren Kategorien (Grafik 40 %, Text 30 %, Asset-Flip 30 %). Bilder werden **nicht** analysiert, daher zeigt die Store-Grafik "n/a", außer der Entwickler hat KI-Nutzung angegeben.
+Der Gesamtwert ist ein gewichteter Durchschnitt der messbaren Kategorien.
 
-## Grenzen
+### Gewichtung
 
-Der Wert ist ein Indikator, kein Beweis dafür, wie ein Spiel entstanden ist. Er kann in beide Richtungen falsch liegen. Nicht verwenden, um ein Studio oder einen Entwickler zu beschuldigen. Community-Daten gibt es nur für kuratierte Einträge; echte Community-Meldungen bräuchten eine Datenbank.
+| Kategorie | Gewicht | Hinweis |
+| --- | --- | --- |
+| Store-Grafiken & Kapselbilder | 40 % | Bilder werden **nicht** analysiert, daher steht hier `n/a`, außer der Entwickler hat KI-Nutzung ausdrücklich angegeben. |
+| Beschreibung & Patchnotes | 30 % | Sucht nach typischen LLM-Floskeln. |
+| Asset-Flip | 30 % | Hinweise auf wiederverwendete oder neu verpackte Assets. |
 
-## Technik
+### Signale der Schätzung
 
-- Next.js 15 (App Router), React 19
-- Tailwind CSS 3
-- Lucide React (Icons)
-- GSAP mit `@gsap/react` (Hero-Einblendung und Hochzählen des Werts, bei reduzierter Bewegung abgeschaltet)
+Bei nicht kuratierten Spielen fließen ein:
 
-Steam-Anfragen laufen in Server-Routen, weil Browser Steam nicht direkt abfragen dürfen (CORS). Ein API-Key ist nicht nötig.
+- typische LLM-Floskeln in der Store-Beschreibung
+- keine Entwickler-Website oder kein Support-Kontakt
+- sehr wenige Nutzerreviews
+- ein sehr niedriger Preis
+- Steams „AI Generated Content Disclosure“, sofern vorhanden *(ohne Garantie)*
 
-## KI-Hinweis
+### Grenzen
 
-Dieses Projekt ist vollständig mit KI generiert, weil es so schwierig ist, so etwas von Hand zu bauen.
+> ⚠️ **Der Wert ist ein Indikator, kein Beweis.** Er kann in beide Richtungen falsch liegen.
 
-## Credits
+- Nicht verwenden, um ein Studio oder einen Entwickler zu beschuldigen.
+- Community-Daten gibt es nur für kuratierte Einträge; echte Community-Meldungen bräuchten eine Datenbank.
 
-Erstellt von marcel533. Spieldaten und Bilder gehören Valve, Steam und den jeweiligen Entwicklern.
+### Technik
+
+| Ebene | Wahl |
+| --- | --- |
+| Framework | Next.js 15 (App Router) |
+| UI | React 19, Tailwind CSS 3 |
+| Icons | Lucide React |
+| Animation | GSAP mit `@gsap/react` (Hero-Einblendung und Hochzählen des Werts; bei reduzierter Bewegung abgeschaltet) |
+| Daten | Steam-Anfragen laufen über Server-Routen, weil Browser Steam nicht direkt abfragen dürfen (CORS). **Kein API-Key nötig.** |
+
+### Erste Schritte
+
+Anleitung zum Starten steht in [USE.md](USE.md). Verwendet werden die üblichen Next.js-Befehle (`npm install`, danach das `dev`-/`build`-Skript aus der `package.json`) – bitte an die tatsächlichen Skripte im Repo anpassen.
+
+### Credits
+
+Erstellt von **marcel533**. Spieldaten und Bilder gehören Valve, Steam und den jeweiligen Entwicklern.
+
+**KI-Hinweis:** Dieses Projekt ist vollständig mit KI generiert.
