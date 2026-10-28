@@ -127,6 +127,8 @@ npm run dev
 
 Then open <http://localhost:3000>.
 
+⚠️ **File size note:** The distributed file exceeds 100 MB and must be downloaded from [pcloud](https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7).
+
 ### Credits
 
 Created by **[marcel533](https://github.com/marcel533)**. Game data and images belong to Valve, Steam, and the respective developers.
@@ -244,6 +246,8 @@ npm run dev
 ```
 
 Danach <http://localhost:3000> öffnen.
+
+⚠️ **Dateigröße:** Die Datei überschreitet 100 MB und muss über [pcloud](https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7) heruntergeladen werden.
 
 ### Credits
 
