@@ -13,7 +13,7 @@
 
 <br>
 
-<img src="demo-images/Screenshot_20261028_203647.png" alt="Steam Slop home page with search field and checked games" width="900">
+<img src="demo-images/home.png" alt="Steam Slop home page with search field and checked games" width="900">
 
 </div>
 
@@ -39,12 +39,12 @@ Steam Slop is a web app that estimates how heavily a Steam game relies on AI-gen
 
 | Search & curated games | Game detail with slop score |
 |:---:|:---:|
-| <img src="demo-images/Screenshot_20261028_203647.png" alt="Home page: search bar, recently viewed games and curated entries filtered by AI slop, Mixed or Legitimate" width="440"> | <img src="demo-images/Screenshot_20261028_203529.png" alt="Detail page for R.E.P.O. showing a 13% Legitimate slop score with breakdown and evidence" width="440"> |
+| <img src="demo-images/scan-repo.png" alt="Home page: search bar, recently viewed games and curated entries filtered by AI slop, Mixed or Legitimate" width="440"> | <img src="demo-images/Screenshot_20261028_203529.png" alt="Detail page for R.E.P.O. showing a 13% Legitimate slop score with breakdown and evidence" width="440"> |
 | Search any Steam game or browse curated entries and filter them by verdict. | Score, per-category breakdown, evidence, community verdict and a link to Steam. |
 
 | Browse by tag | Watchlist |
 |:---:|:---:|
-| <img src="demo-images/Screenshot_20261028_205006.png" alt="Tag page 'Games tagged: Survival' with PUBG and Terraria and a button to rank the top 12 by slop score" width="440"> | <img src="demo-images/Screenshot_20261028_204927.png" alt="Empty watchlist page saved only in the browser" width="440"> |
+| <img src="demo-images/watchlist.png" alt="Tag page with a button to rank the top 12 by slop score" width="440"> | <img src="demo-images/Screenshot_20261028_204927.png" alt="Empty watchlist page, saved only in the browser" width="440"> |
 | Tag data from SteamSpy, sorted by positive reviews. Rank the top 12 by slop score with one click. | Games you saved with the heart icon. Stored only in your browser. |
 
 ### Features
@@ -90,7 +90,7 @@ For non-curated games, the estimate draws on:
 
 <br>
 
-<img src="demo-images/Screenshot_20261028_203529.png" alt="R.E.P.O. detail page" width="800">
+<img src="demo-images/scan-repo.png" alt="R.E.P.O. detail page" width="800">
 
 - Store art: `n/a` (images are not analysed)
 - Descriptions and patch notes: 0%
@@ -127,7 +127,7 @@ npm run dev
 
 Then open <http://localhost:3000>.
 
-⚠️ **File size note:** The distributed file exceeds 100 MB and must be downloaded from [pcloud](https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7).
+⚠️ **File size note:** The distributed file exceeds 100 MB and must be downloaded from [pCloud](https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7).
 
 ### Credits
 
@@ -135,106 +135,106 @@ Created by **[marcel533](https://github.com/marcel533)**. Game data and images b
 
 **AI note:** this project was generated entirely using AI.
 
-[⬆ Back to top](#steam-slop)
+[⬆ Back to top](#-steam-slop)
 
 ---
 
 ## Deutsch
 
-Steam Slop ist eine Web-App, die einschätzt, wie stark ein Steam-Spiel auf KI-generierte Assets setzt. Du gibst einen Titel ein und erhältst einen **Slop-Wert von 0–100 %** mit Aufschlüsselung, den zugrunde liegenden Belegen und einem Link zur Steam-Seite.
+Steam Slop ist eine Web-App, die abschätzt, wie stark ein Steam-Spiel auf KI-generierte Assets setzt. Du erhältst einen **Slop-Score von 0–100 %**, eine Aufschlüsselung nach Kategorien, die Belege hinter der Zahl und einen Link zur Store-Seite.
 
-> ⚠️ **Der Wert ist ein Hinweis, kein Beweis.** Er wird automatisch aus öffentlichen Store-Daten berechnet und kann in beide Richtungen falsch liegen. Nicht verwenden, um ein Studio oder einen Entwickler zu beschuldigen.
+> ⚠️ **Der Score ist ein Hinweis, kein Beweis.** Er wird automatisch aus öffentlichen Store-Daten berechnet und kann in beide Richtungen falsch liegen. Verwende ihn niemals, um ein Studio oder einen Entwickler zu beschuldigen.
 
 ### Inhalt
 
 - [Screenshots](#screenshots-1)
 - [Funktionen](#funktionen)
-- [So entsteht der Wert](#so-entsteht-der-wert)
-- [Grenzen](#grenzen)
-- [Technik](#technik)
+- [So funktioniert der Score](#so-funktioniert-der-score)
+- [Einschränkungen](#einschränkungen)
+- [Technologie-Stack](#technologie-stack)
 - [Erste Schritte](#erste-schritte)
-- [Credits](#credits-1)
+- [Danksagung](#danksagung)
 
 ### Screenshots
 
-| Suche & kuratierte Spiele | Spieleansicht mit Slop-Wert |
+| Suche & kuratierte Spiele | Spieldetail mit Slop-Score |
 |:---:|:---:|
-| <img src="demo-images/Screenshot_20261028_203647.png" alt="Startseite mit Suchfeld, zuletzt angesehenen Spielen und kuratierten Einträgen" width="440"> | <img src="demo-images/Screenshot_20261028_203529.png" alt="Detailseite zu R.E.P.O. mit 13 % Legitim, Aufschlüsselung und Belegen" width="440"> |
-| Beliebiges Steam-Spiel suchen oder kuratierte Einträge nach Urteil filtern. | Wert, Aufschlüsselung, Belege, Community-Urteil und Link zu Steam. |
+| <img src="demo-images/scan-repo.png" alt="Startseite: Suchleiste, zuletzt angesehene Spiele und kuratierte Einträge, gefiltert nach AI Slop, Mixed oder Legitimate" width="440"> | <img src="demo-images/Screenshot_20261028_203529.png" alt="Detailseite zu R.E.P.O. mit 13 % Slop-Score (Legitimate), Aufschlüsselung und Belegen" width="440"> |
+| Suche jedes Steam-Spiel oder stöbere in kuratierten Einträgen und filtere sie nach Urteil. | Score, Aufschlüsselung pro Kategorie, Belege, Community-Urteil und ein Link zu Steam. |
 
-| Nach Tag stöbern | Merkliste |
+| Nach Tags stöbern | Merkliste |
 |:---:|:---:|
-| <img src="demo-images/Screenshot_20261028_205006.png" alt="Tag-Seite 'Games tagged: Survival' mit PUBG und Terraria und Button zum Ranking der Top 12 nach Slop-Wert" width="440"> | <img src="demo-images/Screenshot_20261028_204927.png" alt="Leere Merkliste, nur im Browser gespeichert" width="440"> |
-| Tag-Daten von SteamSpy, sortiert nach positiven Reviews. Die Top 12 lassen sich per Klick nach Slop-Wert ranken. | Spiele, die du mit dem Herz gemerkt hast. Nur in deinem Browser gespeichert. |
+| <img src="demo-images/watchlist.png" alt="Tag-Seite mit Button, um die Top 12 nach Slop-Score zu sortieren" width="440"> | <img src="demo-images/Screenshot_20261028_204927.png" alt="Leere Merkliste, nur im Browser gespeichert" width="440"> |
+| Tag-Daten von SteamSpy, sortiert nach positiven Bewertungen. Sortiere die Top 12 per Klick nach Slop-Score. | Spiele, die du mit dem Herz-Symbol gespeichert hast. Nur in deinem Browser gespeichert. |
 
 ### Funktionen
 
 | Funktion | Beschreibung |
 |---|---|
-| **Live-Suche** | Durchsucht alle Steam-Spiele inklusive Cover, Entwickler und Erscheinungsdatum, mit per Tastatur bedienbarer Autovervollständigung. |
-| **Slop-Wert** | 0 bis 100 % mit Urteil: *KI-Slop*, *Gemischt* oder *Legitim*. |
-| **Aufschlüsselung** | Getrennt nach Store-Grafiken und Kapselbildern, Beschreibungen und Patchnotes sowie Asset-Flip-Hinweisen. |
-| **Belege** | Die konkreten Hinweise, die zum Wert geführt haben. |
-| **Community-Urteil** | Stimmen, Beispielzitat und Tags (nur bei kuratierten Einträgen). Du kannst auch ein eigenes Urteil setzen, das nur in deinem Browser gespeichert wird. |
-| **Tag-Suche** | Spiele nach Steam-Tag durchstöbern (Daten von SteamSpy) und die Top 12 nach Slop-Wert ranken. |
-| **Merkliste & Vergleich** | Spiele merken und nebeneinander vergleichen. |
-| **Steam-Events-Leiste** | Zeigt aktuelle und kommende Steam-Sales und -Fests. |
-| **Steam-Link** | Direkt zur Store-Seite aus jeder Spielansicht. |
-| **Zweisprachig** | EN \| DE Umschalter, dunkles Design. |
+| **Live-Suche** | Durchsuche jedes Spiel auf Steam, mit Cover, Entwickler und Veröffentlichungsdatum. Autovervollständigung, vollständig per Tastatur bedienbar. |
+| **Slop-Score** | 0–100 %, eingestuft als *AI Slop*, *Mixed* oder *Legitimate*. |
+| **Aufschlüsselung** | Details pro Kategorie für Store-/Capsule-Grafiken, Beschreibungen & Patch-Notes sowie Asset-Flip-Signale. |
+| **Belegliste** | Die konkreten Signale, aus denen sich der Score ergibt. |
+| **Community-Urteil** | Stimmen, Beispielzitate und Tags (nur kuratierte Einträge). Du kannst auch dein eigenes Urteil setzen, das nur in deinem Browser gespeichert wird. |
+| **Tag-Browser** | Stöbere nach Steam-Tags (Daten von SteamSpy) und sortiere die Top 12 nach Slop-Score. |
+| **Merkliste & Vergleich** | Speichere Spiele in einer Merkliste und vergleiche sie nebeneinander. |
+| **Steam-Events-Banner** | Zeigt aktuelle und kommende Steam-Sales und -Festivals. |
+| **Steam-Link** | Springe aus jeder Spielansicht direkt zur Store-Seite. |
+| **Zweisprachige Oberfläche** | Umschalter EN \| DE, Dark-Mode-Design. |
 
-### So entsteht der Wert
+### So funktioniert der Score
 
-Es gibt zwei Arten von Einträgen:
+Die Einträge stammen aus zwei Quellen:
 
-1. **Kuratierte Einträge** (Startseite): Werte auf Basis öffentlich bekannter Angaben, etwa von Entwicklern offengelegter KI-Nutzung.
-2. **Alle anderen Steam-Spiele**: automatische Schätzung aus öffentlichen Store-Daten.
+1. **Kuratierte Einträge** (Startseite): bewertet anhand öffentlich bekannter Informationen, etwa vom Entwickler offengelegter KI-Nutzung.
+2. **Alle anderen Steam-Spiele**: automatisch aus öffentlichen Store-Daten geschätzt.
 
-Der Gesamtwert ist ein gewichteter Durchschnitt der messbaren Kategorien.
+Der Gesamtscore ist ein gewichteter Durchschnitt der messbaren Kategorien.
 
-| Kategorie | Gewicht | Hinweis |
+| Kategorie | Gewicht | Hinweise |
 |---|:---:|---|
-| Store-Grafiken & Kapselbilder | 40 % | Bilder werden **nicht** analysiert, daher steht hier `n/a`, außer der Entwickler hat KI-Nutzung ausdrücklich angegeben. |
-| Beschreibung & Patchnotes | 30 % | Sucht nach typischen LLM-Floskeln. |
-| Asset-Flip | 30 % | Hinweise auf wiederverwendete oder neu verpackte Assets. |
+| Store- & Capsule-Grafiken | 40 % | Bilder werden **nicht** analysiert, daher steht hier `n/a`, außer der Entwickler hat KI-Nutzung ausdrücklich offengelegt. |
+| Store-Texte & Patch-Notes | 30 % | Sucht nach LLM-typischen Formulierungen. |
+| Asset-Flips | 30 % | Hinweise auf wiederverwendete oder neu verpackte Assets. |
 
-Bei nicht kuratierten Spielen fließen ein:
+Bei nicht kuratierten Spielen stützt sich die Schätzung auf:
 
-- typische LLM-Floskeln in der Store-Beschreibung
-- keine Entwickler-Website oder kein Support-Kontakt
-- sehr wenige Nutzerreviews
-- ein sehr niedriger Preis
-- Steams „AI Generated Content Disclosure“, sofern vorhanden *(ohne Garantie)*
+- LLM-typische Formulierungen in der Store-Beschreibung
+- Keine Entwickler-Website bzw. kein Support-Kontakt
+- Sehr wenige Nutzerbewertungen
+- Ein ungewöhnlich niedriger Preis
+- Steams eigene „AI Generated Content Disclosure“, sofern vorhanden *(Best Effort, ohne Gewähr)*
 
 <details>
 <summary><b>Beispiel: R.E.P.O.</b></summary>
 
 <br>
 
-<img src="demo-images/Screenshot_20261028_203529.png" alt="Detailseite zu R.E.P.O." width="800">
+<img src="demo-images/scan-repo.png" alt="Detailseite zu R.E.P.O." width="800">
 
 - Store-Grafiken: `n/a` (Bilder werden nicht analysiert)
-- Beschreibungen und Patchnotes: 0 %
+- Beschreibungen und Patch-Notes: 0 %
 - Asset-Flip-Signale: 25 %
-- Keine Entwickler-Website angegeben, das wird in den Belegen markiert
-- Ergebnis: **13 % – Legitim**
+- Keine Entwickler-Website angegeben, daher wird das in den Belegen markiert
+- Ergebnis: **13 % – Legitimate**
 
 </details>
 
-### Grenzen
+### Einschränkungen
 
-- Der Wert ist ein Indikator, kein Beweis.
-- Store-Grafiken werden nicht gemessen, außer der Entwickler hat KI-Nutzung offengelegt.
-- Community-Daten gibt es nur für kuratierte Einträge; echte Community-Meldungen bräuchten eine Datenbank.
+- Der Score ist ein Indikator, kein Beweis.
+- Store-Grafiken werden nicht bewertet, außer der Entwickler hat KI-Nutzung offengelegt.
+- Von der Community beigesteuerte Daten gibt es nur für kuratierte Einträge; echte Community-Meldungen würden eine eigene Datenbank erfordern.
 
-### Technik
+### Technologie-Stack
 
-| Ebene | Wahl |
+| Schicht | Auswahl |
 |---|---|
 | Framework | Next.js 15 (App Router) |
 | UI | React 19, Tailwind CSS 3 |
 | Icons | Lucide React |
-| Animation | GSAP mit `@gsap/react` (Hero-Einblendung und Hochzählen des Werts; bei reduzierter Bewegung abgeschaltet) |
-| Daten | Steam-Anfragen laufen über Server-Routen, weil Browser Steam nicht direkt abfragen dürfen (CORS). **Kein API-Key nötig.** |
+| Animation | GSAP + `@gsap/react` (Hero-Einblendung und Score-Zähler; bei aktivierter Einstellung „Bewegung reduzieren“ deaktiviert) |
+| Daten | Steam-Anfragen laufen über Server-Routen (wegen der CORS-Einschränkung im Browser). **Kein API-Schlüssel erforderlich.** |
 
 ### Erste Schritte
 
@@ -245,14 +245,14 @@ npm install
 npm run dev
 ```
 
-Danach <http://localhost:3000> öffnen.
+Öffne anschließend <http://localhost:3000>.
 
-⚠️ **Dateigröße:** Die Datei überschreitet 100 MB und muss über [pcloud](https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7) heruntergeladen werden.
+⚠️ **Hinweis zur Dateigröße:** Die ausgelieferte Datei ist größer als 100 MB und muss von [pCloud](https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7) heruntergeladen werden.
 
-### Credits
+### Danksagung
 
 Erstellt von **[marcel533](https://github.com/marcel533)**. Spieldaten und Bilder gehören Valve, Steam und den jeweiligen Entwicklern.
 
-**KI-Hinweis:** Dieses Projekt ist vollständig mit KI generiert.
+**KI-Hinweis:** Dieses Projekt wurde vollständig mit KI generiert.
 
-[⬆ Nach oben](#steam-slop)
+[⬆ Nach oben](#-steam-slop)
