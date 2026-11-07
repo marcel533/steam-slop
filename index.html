@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Steam Slop – Docs</title>
+<style>
+:root{--bg:#0F0F11;--sf:#161618;--bd:rgba(255,255,255,.08);--tx:#ececee;--mu:#8e8e96;--ac:#ececee;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--tx)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;padding:10px 20px}
+.logo{font-weight:600;text-decoration:none;font-size:15px}
+.sp{flex:1}
+.btn{display:inline-flex;align-items:center;padding:7px 12px;border-radius:6px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);text-decoration:none;font:500 13px system-ui,sans-serif;cursor:pointer}
+.btn:hover{border-color:rgba(255,255,255,.22)}
+.btn.p{background:var(--ac);color:#0F0F11;border-color:var(--ac)}
+.lang{display:flex;border:1px solid var(--bd);border-radius:6px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--mu);padding:6px 9px;font:500 12px system-ui,sans-serif;cursor:pointer}
+.lang button.on{background:var(--sf);color:var(--tx)}
+.wrap{display:grid;grid-template-columns:210px 1fr;max-width:1040px;margin:0 auto}
+nav{position:sticky;top:57px;align-self:start;padding:24px 12px;height:calc(100vh - 57px);overflow:auto;border-right:1px solid var(--bd)}
+nav a{display:block;padding:5px 10px;border-radius:6px;color:var(--mu);text-decoration:none;font-size:13px}
+nav a:hover,nav a.on{color:var(--tx);background:var(--sf)}
+main{padding:32px 32px 80px;min-width:0}
+h1{font-size:28px;line-height:1.2;margin:0 0 8px;font-weight:600}
+h2{font-size:19px;margin:44px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--bd);font-weight:600}
+.lead{color:var(--mu);max-width:60ch}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+code{background:var(--sf);border:1px solid var(--bd);padding:1px 5px;border-radius:4px;font:12.5px ui-monospace,Menlo,Consolas,monospace}
+.cb{position:relative;margin:12px 0}
+pre{margin:0;background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:14px;overflow-x:auto;font:12.5px/1.6 ui-monospace,Menlo,Consolas,monospace}
+pre code{border:0;padding:0;background:none}
+.cp{position:absolute;top:8px;right:8px;font:12px system-ui,sans-serif;padding:3px 8px;border-radius:6px;border:1px solid var(--bd);background:var(--bg);color:var(--mu);cursor:pointer}
+.note{border:1px solid var(--bd);background:var(--sf);border-radius:8px;padding:10px 14px;margin:14px 0;color:var(--mu)}
+.note b{color:var(--tx)}
+.tw{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{border:1px solid var(--bd);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--sf);font-weight:600}
+li{margin:3px 0}
+footer{border-top:1px solid var(--bd);padding:20px;text-align:center;color:var(--mu);font-size:12.5px}
+#bar{position:fixed;top:0;left:0;right:0;height:2px;background:var(--ac);transform:scaleX(0);transform-origin:0 0;z-index:30}
+main{counter-reset:s}
+h2::before{counter-increment:s;content:"0" counter(s);font:500 12px ui-monospace,Menlo,Consolas,monospace;color:var(--mu);margin-right:10px}
+tr:hover td{background:rgba(255,255,255,.02)}
+.btn{transition:transform .15s,border-color .15s}.btn:hover{transform:translateY(-1px)}
+nav a{border-left:2px solid transparent;border-radius:0 6px 6px 0}nav a.on{border-left-color:var(--ac)}
+.calc{border:1px solid var(--bd);background:var(--sf);border-radius:8px;padding:20px;margin:14px 0}
+.out{display:flex;align-items:baseline;flex-wrap:wrap}
+#num{font:600 56px/1 ui-monospace,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.pc{font:500 20px ui-monospace,Menlo,Consolas,monospace;color:var(--mu);margin-left:4px}
+.track{flex-basis:100%;height:6px;background:var(--bg);border:1px solid var(--bd);border-radius:6px;margin-top:14px;overflow:hidden}
+#fill{height:100%;width:0;background:var(--ac)}
+.ctl{margin-top:16px}
+.cr{display:grid;grid-template-columns:160px 1fr 52px 62px;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--bd);font-size:13.5px}
+.cr em{color:var(--mu);font-style:normal;font-size:12px;margin-left:4px}
+.cr input[type=range]{width:100%;accent-color:#ececec}
+.cr input:disabled{opacity:.35}
+.cr output{font:12.5px ui-monospace,Menlo,Consolas,monospace;text-align:right;color:var(--mu)}
+.na{color:var(--mu);font-size:12.5px;cursor:pointer;white-space:nowrap}
+:root{--gd:#c9a66b}
+html{scroll-padding-top:104px}
+.logo{display:flex;align-items:center;gap:10px}
+.mk{width:26px;height:26px;border:1px solid var(--bd);border-radius:7px;background:var(--sf);display:grid;place-items:center;font:600 10px ui-monospace,Menlo,Consolas,monospace;color:var(--gd)}
+.info{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding:9px 20px;border-bottom:1px solid var(--bd);font-size:12.5px;color:var(--mu)}
+.info b{color:var(--tx);font-weight:500}
+.wrap{display:block;max-width:none}
+main{max-width:900px;margin:0 auto}
+nav{position:sticky;top:calc(57px + env(safe-area-inset-top,0px));height:auto;display:flex;justify-content:center;gap:2px;padding:6px 12px;border:0;border-bottom:1px solid var(--bd);background:var(--bg);z-index:15;overflow-x:auto;align-self:auto}
+nav a{display:inline-block;white-space:nowrap;border:0;border-radius:6px;padding:5px 10px}
+.eyebrow{font:500 11px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin-bottom:14px}
+h1{font-size:clamp(34px,6vw,52px);line-height:1.08;letter-spacing:-.02em}
+.hl{color:var(--gd)}
+.micro{font-size:12.5px;color:var(--mu);margin:0}
+.panel{border:1px solid var(--bd);border-radius:8px;background:var(--sf);margin:26px 0 0;overflow:hidden}
+.ph{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--bd);font-size:13px}
+.pb{padding:18px}
+.mu{color:var(--mu);font-size:12px}
+.big{display:flex;align-items:baseline;margin:8px 0 16px}
+#hn{font:600 52px/1 ui-monospace,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.st{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--bd);background:var(--bg);border-radius:6px;padding:9px 12px;margin-top:8px;font-size:13.5px;color:var(--mu);transition:color .2s,border-color .2s}
+.st.r{color:var(--tx);border-color:rgba(201,166,107,.45)}.st.d{color:var(--tx)}
+.st em{font-style:normal;font-size:12px}
+.st.w em::after{content:"Waiting"}.st.r em::after{content:"Running"}.st.d em::after{content:"Done"}
+html[lang=de] .st.w em::after{content:"Wartet"}html[lang=de] .st.r em::after{content:"Läuft"}html[lang=de] .st.d em::after{content:"Fertig"}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--mu);margin-right:8px}
+.panel.run .dot{background:var(--gd)}.panel.done .dot{background:var(--tx)}
+#ps::after{content:"Ready"}.panel.run #ps::after{content:"Scanning"}.panel.done #ps::after{content:"Done"}
+html[lang=de] #ps::after{content:"Bereit"}html[lang=de] .panel.run #ps::after{content:"Scannt"}html[lang=de] .panel.done #ps::after{content:"Fertig"}
+@media(max-width:560px){.cr{grid-template-columns:1fr auto auto}.cr input[type=range]{grid-column:1/-1;order:5}}
+@media(max-width:800px){.wrap{display:block}main{padding:24px 18px 60px}.hm{display:none}}
+.mk{overflow:hidden;object-fit:cover;padding:0}
+.tabs{display:inline-flex;border:1px solid var(--bd);border-radius:6px;overflow:hidden;margin:14px 0 2px}
+.tabs button{background:none;border:0;color:var(--mu);padding:6px 14px;font:500 13px system-ui,sans-serif;cursor:pointer}
+.tabs button.on{background:var(--sf);color:var(--tx)}
+.tp h3{font-size:14px;margin:22px 0 6px;font-weight:600}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header>
+  <a class="logo" href="#top"><img class="mk" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAkFBMVEXH/0HE/0DD/0DB/z+//T+8+j669z249T239T239D238z228z228jy18jy08Dyo3zmKtjF0mCtxkipvkipukSplhSdceCVCVR4zQBspMhcnMBckKxYbIBQSFBIREhIREREQERIQEREQEBIQEBEPEBEPDxENDREMCxALCRAKCBAJCBAJBw8IBQ8GAw8EAA4BAA3yoJguAAAD9ElEQVR42uWX25KjOAxAuZqBgMEJMdBgMixgSAPm//9uHO63dNM1L1u7ekiqEvlYkmVJFvK/FOG/A0iTQdKv9Xd6AyArnoOUXwPKUa/IloCMRsFHJ0FIv1pPw1EvotkMSIvIvd46cZFfJe+WPyofub3e1Y2KdAIkzwC57k8ArouCZ7IAfNxcv7PulAtB6Lu3jw3gFrLybBBLFt72gKCMzx5jXAYHgOGHM7LU/9cAAtcNfgKY9ftEKkOEwjI9C1jqD3eB+j79yR2c9cfbWFU/u8WT/ghI5gBkMYnjx05i/nM2hyF5V1AyQhvGmnonr18pSb+rSA/KiI+RcyAI+4TRx9eAuEqwrYiSJO9EkkTFxr+r+CtAXIe2oF4gNPcCLeuiCvZHHb8HPKrQlqEBJAloWzFUYGgGlO2werwDZDTj6zUAEYJbAlBsqOiaxgkpzd4ACLsLkKugtkUctN4fF6GtGpwg3Bk5BvDKCIEOFAHVNRIUsFpvl6T1RGhqOoBDNdwBCMOipQHsB5QGPl4C+KqwbV1JkXXNEvHShJUFjmKqdtHWaVq3ha3qM+HCT9AFquOowFScYwuSOgB8K8OLIkqjyDdXcdRVUZZx22LZ1EBQJweA3gNuLLx+fl4hD8c6jJYJQkpDsPFhYUHlcLqmX4TXKQgXfZsJptJbYMpOdWBBWkb9pgawMbZ51mxF72Ogv85hLj4TIGbey4DeXVHd7d+JLHemyB6LdwDCXB6CnmBZx+s1s9vCEt05CAsXHOWinZKL4uxdmEJwQlZBGAGPxlfnuJmG+bJGNzub9f7DXGS23zw2AJ4FkjXuoMuKxK+eDnhd4V9q9yHJ+mihJc2ZMAPuUwx15e57PK0BxF6X3Y56AbaHlZFgifcdIGZoBJgSbqs2NEwJtYzYQMStrSoeTyLJHAFoOscFYHCB/9sSkke2Jt4bws+Gr0UiDClpxz0saQ8g7Nb/ayo2pSmvDS8AI3UHuAt2VDwo5Q71e9z2MWiwCLtENgJeNidA5ajqAEjjOjC6FIcibraAZxNBFZqWLnov+ARoHEH2BwA30xN1y+SKUfNcA3izZJ4hypKMO+8mwDNw7jkbADxSmLcM0fDYurn27boNrg7ymyQfARIHpM+miSdAnjQ+cq5Bu2nv/cBQlKxmTTwV2F/CvSV5wpvqDMjjhiuVxWbAGEaWmPAWPJUXJEC/7yGvJBsBOW/cJD4xI6WU+uFQeAgP4qqWnxqysrwuk2micfDnP99NadtBM6V5Nt31pvl+0NyMunxbQkdaOsXm/ai7GbZf9cH5TE4P27tx/xDwdtw/enCsXPjuwXH45ElLmp598hw/utLs/KPr7599/+u38x8ZvtYqBTjLzgAAAABJRU5ErkJggg==" alt="" width="26" height="26">Steam Slop</a>
+  <div class="sp"></div>
+  <a class="btn hm" href="https://github.com/marcel533/steam-slop" target="_blank" rel="noopener noreferrer">GitHub</a>
+  <a class="btn p" href="https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7" target="_blank" rel="noopener noreferrer"><span class="i" data-de="Download (pCloud)">Download (pCloud)</span></a>
+  <div class="lang" role="group" aria-label="Language"><button data-l="en" class="on">EN</button><button data-l="de">DE</button></div>
+</header>
+
+<div class="info"><span><i class="dot" style="background:var(--gd)"></i><b>Docs</b></span><span>Next.js 15 · React 19 · Tailwind 3 · GSAP</span><span class="sp"></span><span class="i" data-de="Kein API-Key nötig">No API key required</span></div>
+
+<div class="wrap">
+<nav id="nav">
+  <a href="#top" class="i" data-de="Überblick">Overview</a>
+  <a href="#features" class="i" data-de="Funktionen">Features</a>
+  <a href="#score" class="i" data-de="Wertung">Scoring</a>
+  <a href="#try" class="i" data-de="Ausprobieren">Try it</a>
+  <a href="#signals" class="i" data-de="Signale">Signals</a>
+  <a href="#limits" class="i" data-de="Grenzen">Limits</a>
+  <a href="#stack" class="i" data-de="Technik">Tech stack</a>
+  <a href="#run" class="i" data-de="Starten">Run it</a>
+  <a href="#credits">Credits</a>
+</nav>
+
+<main>
+<section id="top" class="s">
+  <div class="eyebrow i" data-de="KI-Inhalts-Check">AI content check</div>
+  <h1 class="i" data-de="Ist dieses Spiel <span class='hl'>KI-Slop?</span>">Is this game <span class="hl">AI slop?</span></h1>
+  <p class="lead i" data-de="Wie viel eines Steam-Spiels ist KI-generiert? Titel eingeben, Slop-Wert erhalten. Eine Web-App, die aus öffentlichen Store-Daten einen Wert von 0 bis 100 % schätzt, mit Aufschlüsselung, Belegen und Link zur Store-Seite.">How much of a Steam game is AI-generated? Enter a title, get a slop score. A web app that estimates a 0 to 100% score from public store data, with a category breakdown, the evidence behind it and a link to the store page.</p>
+  <div class="row">
+    <a class="btn p" href="https://e.pcloud.link/publink/show?code=XZY41X7ZKtTbdQEL7dbphM60hAJoVkneB2c7" target="_blank" rel="noopener noreferrer"><span class="i" data-de="Build herunterladen (pCloud, über 100 MB)">Download build (pCloud, 100+ MB)</span></a>
+    <a class="btn" href="https://github.com/marcel533/steam-slop" target="_blank" rel="noopener noreferrer"><span class="i" data-de="Quellcode auf GitHub">Source on GitHub</span></a>
+    <a class="btn" href="https://github.com/marcel533/steam-slop/blob/main/USE.md" target="_blank" rel="noopener noreferrer">USE.md</a>
+    <a class="btn" href="https://github.com/marcel533/steam-slop/tree/main/demo-images" target="_blank" rel="noopener noreferrer"><span class="i" data-de="Screenshots">Screenshots</span></a>
+  </div>
+<p class="micro i" data-de="Öffentliche Store-Daten · Kein Upload · Indikator, kein Beweis">Public store data · No upload · Indicator, not proof</p>
+  <div class="panel" id="pnl">
+    <div class="ph"><span><i class="dot"></i><span id="ps"></span></span><span class="mu i" data-de="Beispiel: R.E.P.O.">Example: R.E.P.O.</span></div>
+    <div class="pb">
+      <div style="display:flex;justify-content:space-between"><span class="eyebrow" style="margin:0">Slop score</span><span class="mu i" data-de="Illustration des Ablaufs">Illustration of the flow</span></div>
+      <div class="big"><span id="hn">–</span><span class="pc">%</span></div>
+      <div class="st w"><span class="i" data-de="Store-Daten lesen">Read store data</span><em></em></div>
+      <div class="st w"><span class="i" data-de="KI-Angabe prüfen">Check AI disclosure</span><em></em></div>
+      <div class="st w"><span class="i" data-de="Aktuelle Reviews stichprobenartig prüfen">Sample recent reviews</span><em></em></div>
+      <div class="st w"><span class="i" data-de="Wert berechnen">Calculate score</span><em></em></div>
+      <button class="btn" id="rp" style="margin-top:14px"><span class="i" data-de="Nochmal abspielen">Replay</span></button>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="s">
+  <h2 class="i" data-de="Funktionen">Features</h2>
+  <div class="tw"><table>
+    <tr><td><b class="i" data-de="Live-Suche">Live search</b></td><td class="i" data-de="Alle Steam-Spiele mit Cover, Entwickler und Erscheinungsdatum. Autovervollständigung per Tastatur bedienbar.">Every Steam game, with cover art, developer and release date. Autocomplete works with the keyboard.</td></tr>
+    <tr><td><b class="i" data-de="Slop-Wert">Slop score</b></td><td class="i" data-de="0 bis 100 %, eingeordnet als KI-Slop, Gemischt oder Legitim.">0 to 100%, classified as AI Slop, Mixed or Legitimate.</td></tr>
+    <tr><td><b class="i" data-de="Aufschlüsselung">Breakdown</b></td><td class="i" data-de="Store-Grafiken und Kapselbilder, Texte und Patchnotes, Asset-Flips.">Store and capsule graphics, text and patch notes, asset flips.</td></tr>
+    <tr><td><b class="i" data-de="Belege">Evidence list</b></td><td class="i" data-de="Die einzelnen Signale, aus denen der Wert entsteht.">The individual signals that produced the score.</td></tr>
+    <tr><td><b class="i" data-de="Community-Urteil">Community consensus</b></td><td class="i" data-de="Stimmen, Beispielzitate und Tags (nur kuratierte Einträge). Ein eigenes Urteil lässt sich setzen und wird nur im Browser gespeichert.">Votes, example quotes and tags (curated entries only). You can set your own verdict, stored only in your browser.</td></tr>
+    <tr><td><b class="i" data-de="Entwickler-Historie">Developer history</b></td><td class="i" data-de="Prüft auf Anfrage die weiteren Spiele des Entwicklers. Mehrere Steam-Anfragen, daher nur auf Klick.">On request, checks the developer's other games. Runs several Steam requests, so only when you ask.</td></tr>
+    <tr><td><b class="i" data-de="Score-Verlauf">Score history</b></td><td class="i" data-de="Zeigt, wie sich der Wert eines Spiels über die Zeit verändert.">Tracks how a game's score changes over time.</td></tr>
+    <tr><td><b class="i" data-de="Teilen, Link kopieren, Drucken">Share, copy link, print</b></td><td class="i" data-de="Wert teilen, Link zum Bericht kopieren oder den Bericht drucken.">Share the score, copy a link to the report, or print it.</td></tr>
+    <tr><td><b class="i" data-de="Tag-Browser">Tag browsing</b></td><td class="i" data-de="Spiele nach Steam-Tag durchsuchen (Daten von SteamSpy, nach positiven Reviews sortiert). Die Top 12 lassen sich per Klick nach Slop-Wert ranken.">Browse games by Steam tag (SteamSpy data, sorted by positive reviews). Rank the top 12 by slop score with one click.</td></tr>
+    <tr><td><b class="i" data-de="Merkliste und Vergleich">Watchlist and compare</b></td><td class="i" data-de="Spiele per Herz-Symbol merken und nebeneinander vergleichen. Gespeichert wird nur im Browser.">Save games with the heart icon and compare them side by side. Stored only in your browser.</td></tr>
+    <tr><td><b class="i" data-de="Steam-Events-Banner">Steam events banner</b></td><td class="i" data-de="Zeigt aktuelle und kommende Steam-Sales und -Festivals.">Shows current and upcoming Steam sales and fests.</td></tr>
+    <tr><td><b class="i" data-de="Zweisprachig">Bilingual UI</b></td><td class="i" data-de="EN | DE Umschalter, dunkles Design.">EN | DE toggle, dark design.</td></tr>
+  </table></div>
+</section>
+
+<section id="score" class="s">
+  <h2 class="i" data-de="Wertung">How the score works</h2>
+  <p class="i" data-de="Es gibt zwei Arten von Einträgen: kuratierte Einträge auf der Startseite, bewertet nach öffentlich bekannten Angaben wie offengelegter KI-Nutzung, und alle anderen Steam-Spiele, die automatisch aus Store-Daten geschätzt werden. Der Gesamtwert ist der gewichtete Durchschnitt der messbaren Kategorien.">Entries come from two sources: curated entries on the homepage, scored from public information such as AI use disclosed by the developer, and every other Steam game, estimated automatically from store data. The overall score is the weighted average of the measurable categories.</p>
+  <div class="tw"><table>
+    <tr><th class="i" data-de="Kategorie">Category</th><th class="i" data-de="Gewicht">Weight</th><th class="i" data-de="Hinweis">Notes</th></tr>
+    <tr><td class="i" data-de="Store-Grafiken und Kapselbilder">Store and capsule graphics</td><td>40%</td><td class="i" data-de="Bilder werden nicht analysiert. Ohne ausdrückliche Angabe des Entwicklers steht hier n/a.">Images are not analysed. Reads <code>n/a</code> unless the developer disclosed AI use.</td></tr>
+    <tr><td class="i" data-de="Beschreibung und Patchnotes">Store text and patch notes</td><td>30%</td><td class="i" data-de="Sucht nach typischen LLM-Floskeln und Erwähnungen KI-generierter Inhalte.">Looks for LLM-typical phrasing and mentions of AI-generated content.</td></tr>
+    <tr><td>Asset flips</td><td>30%</td><td class="i" data-de="Hinweise auf wiederverwendete oder neu verpackte Assets.">Indicators of reused or repackaged assets.</td></tr>
+  </table></div>
+  <h3 class="i" data-de="Beispiel: R.E.P.O." style="font-size:15px;margin:22px 0 8px">Example: R.E.P.O.</h3>
+  <ul>
+    <li class="i" data-de="Store-Grafiken: n/a (Bilder werden nicht analysiert)">Store art: <code>n/a</code> (images are not analysed)</li>
+    <li class="i" data-de="Beschreibungen und Patchnotes: 40 %">Descriptions and patch notes: 40%</li>
+    <li class="i" data-de="Asset-Flip-Signale: 25 %">Asset flip signals: 25%</li>
+    <li class="i" data-de="Zwei Signale: keine Entwickler-Website angegeben, und Entwickler-News bzw. Patchnotes erwähnen KI-generierte Inhalte">Two signals raised: no developer website listed, and developer news or patch notes mention AI-generated content</li>
+    <li class="i" data-de="Rechnung: (30 × 40 + 30 × 25) / 60 = 32,5, angezeigt als 33 %">Calculation: (30 × 40 + 30 × 25) / 60 = 32.5, shown as 33%</li>
+    <li class="i" data-de="Ergebnis: 33 %, Legitimate"><b>Result: 33%, Legitimate</b></li>
+    <li class="i" data-de="Die Review-Datenquelle war nicht erreichbar, daher warnt die Seite, dass der Wert unvollständig sein kann">The review data source was unreachable, so the page warns that the score may be incomplete</li>
+  </ul>
+</section>
+
+<section id="try" class="s">
+  <h2 class="i" data-de="Ausprobieren">Try it</h2>
+  <p class="i" data-de="Stell die Kategorien ein und sieh, wie der Gesamtwert entsteht. Eine Kategorie auf n/a wird übersprungen, die übrigen werden neu gewichtet. Die Vorlage zeigt R.E.P.O.">Set the categories and watch the overall score form. A category set to n/a is skipped and the rest are reweighted. The preset is R.E.P.O.</p>
+  <div class="calc">
+    <div class="out"><span id="num">0</span><span class="pc">%</span><div class="track"><div id="fill"></div></div></div>
+    <div class="ctl">
+      <div class="cr"><span><span class="i" data-de="Store-Grafiken">Store graphics</span><em>40%</em></span><input type="range" min="0" max="100" value="0" data-w="40" disabled aria-label="Store graphics"><output>n/a</output><label class="na"><input type="checkbox" checked> n/a</label></div>
+      <div class="cr"><span><span class="i" data-de="Texte und Patchnotes">Text and patch notes</span><em>30%</em></span><input type="range" min="0" max="100" value="40" data-w="30" aria-label="Text and patch notes"><output>40%</output><label class="na"><input type="checkbox"> n/a</label></div>
+      <div class="cr"><span><span>Asset flips</span><em>30%</em></span><input type="range" min="0" max="100" value="25" data-w="30" aria-label="Asset flips"><output>25%</output><label class="na"><input type="checkbox"> n/a</label></div>
+    </div>
+    <div class="row" style="margin-bottom:0"><button class="btn" id="ex">R.E.P.O.</button><button class="btn" id="rs"><span class="i" data-de="Zurücksetzen">Reset</span></button></div>
+  </div>
+</section>
+
+<section id="signals" class="s">
+  <h2 class="i" data-de="Signale der Schätzung">Estimation signals</h2>
+  <p class="i" data-de="Bei nicht kuratierten Spielen fließen diese Punkte ein:">For non-curated games the estimate uses:</p>
+  <ul>
+    <li class="i" data-de="typische LLM-Floskeln in der Store-Beschreibung">LLM-typical phrasing in the store description</li>
+    <li class="i" data-de="Entwickler-News oder Patchnotes, die KI-generierte Inhalte erwähnen">developer news or patch notes mentioning AI-generated content</li>
+    <li class="i" data-de="keine Entwickler-Website und kein Support-Kontakt">no developer website or support contact</li>
+    <li class="i" data-de="sehr wenige Nutzerreviews">very few user reviews</li>
+    <li class="i" data-de="ein auffallend niedriger Preis">an unusually low price</li>
+    <li class="i" data-de="Steams „AI Generated Content Disclosure“, falls vorhanden (ohne Garantie)">Steam’s own “AI Generated Content Disclosure”, where present (best effort)</li>
+  </ul>
+</section>
+
+<section id="limits" class="s">
+  <h2 class="i" data-de="Grenzen">Limitations</h2>
+  <div class="note"><b class="i" data-de="Der Wert ist ein Indikator, kein Beweis.">The score is an indicator, not proof.</b> <span class="i" data-de="Er kann in beide Richtungen falsch liegen. Nicht verwenden, um ein Studio oder einen Entwickler zu beschuldigen.">It can be wrong in either direction. Do not use it to accuse a studio or developer.</span></div>
+  <p class="i" data-de="Ist eine Datenquelle (zum Beispiel Reviews) nicht erreichbar, kann der Wert unvollständig sein. Die Seite weist darauf hin.">If a data source (for example reviews) is unreachable, the score may be incomplete and the page says so.</p>
+  <p class="i" data-de="Community-Daten gibt es nur für kuratierte Einträge. Echte Community-Meldungen bräuchten eine eigene Datenbank.">Community data exists only for curated entries. Real community reporting would need its own database.</p>
+</section>
+
+<section id="stack" class="s">
+  <h2 class="i" data-de="Technik">Tech stack</h2>
+  <div class="tw"><table>
+    <tr><td>Framework</td><td>Next.js 15 (App Router)</td></tr>
+    <tr><td>UI</td><td>React 19, Tailwind CSS 3, Lucide React</td></tr>
+    <tr><td class="i" data-de="Animation">Animation</td><td class="i" data-de="GSAP mit @gsap/react: Hero-Einblendung und Hochzählen des Werts. Bei reduzierter Bewegung abgeschaltet.">GSAP with <code>@gsap/react</code>: hero reveal and score counter. Disabled with reduced-motion settings.</td></tr>
+    <tr><td class="i" data-de="Daten">Data</td><td class="i" data-de="Steam-Anfragen laufen über Server-Routen (CORS). Kein API-Key nötig.">Steam requests go through server routes because of browser CORS. No API key required.</td></tr>
+  </table></div>
+</section>
+
+<section id="run" class="s">
+  <h2 class="i" data-de="Starten">Run it</h2>
+  <p class="i" data-de="Benötigt Node.js 22.12 oder neuer (22 oder 24 LTS empfohlen, Node 20 ist abgekündigt) und eine Internetverbindung. Optionale Einstellungen stehen in der README und in <code>.env.example</code>.">Needs Node.js 22.12 or newer (22 or 24 LTS recommended, Node 20 is end-of-life) and an internet connection. Optional settings are in the README and <code>.env.example</code>.</p>
+  <div class="tabs" role="tablist"><button data-os="linux" class="on">Linux</button><button data-os="win">Windows</button></div>
+
+  <div class="tp" data-os="linux">
+    <h3 class="i" data-de="1. Node.js installieren">1. Install Node.js</h3>
+    <p class="i" data-de="Mit nvm (jede Distribution, ohne Root). Das Skript wird erst geladen und dann ausgeführt, du kannst es vorher lesen:">With nvm (any distro, no root). The script is downloaded first and then run, so you can read it before executing:</p>
+    <div class="cb"><button class="cp">Copy</button><pre><code>curl -fsSL -o /tmp/nvm-install.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh
+bash /tmp/nvm-install.sh
+source ~/.bashrc
+nvm install 22
+nvm use 22</code></pre></div>
+    <p class="i" data-de="Oder mit dem Paketmanager (Version kann älter sein, mit <code>node -v</code> prüfen):">Or with your package manager (version may be older, check with <code>node -v</code>):</p>
+    <div class="cb"><button class="cp">Copy</button><pre><code>sudo apt install nodejs npm        # Debian, Ubuntu
+sudo dnf install nodejs npm        # Fedora
+sudo pacman -S nodejs npm          # Arch</code></pre></div>
+    <h3 class="i" data-de="2. Entpacken und starten">2. Unpack and start</h3>
+    <div class="cb"><button class="cp">Copy</button><pre><code>unzip steam-slop.zip
+cd steam-slop
+npm install
+npm run dev</code></pre></div>
+    <p class="i" data-de="Öffnen: <code>http://localhost:3000</code>">Open <code>http://localhost:3000</code></p>
+    <h3 class="i" data-de="3. Stoppen">3. Stop</h3>
+    <p class="i" data-de="<code>Ctrl+C</code> im Terminal. Läuft es noch im Hintergrund:">Press <code>Ctrl+C</code> in the terminal. If it still runs in the background:</p>
+    <div class="cb"><button class="cp">Copy</button><pre><code>fuser -k 3000/tcp</code></pre></div>
+  </div>
+
+  <div class="tp" data-os="win" hidden>
+    <h3 class="i" data-de="1. Node.js installieren">1. Install Node.js</h3>
+    <p class="i" data-de="PowerShell öffnen und ausführen:">Open PowerShell and run:</p>
+    <div class="cb"><button class="cp">Copy</button><pre><code>winget install OpenJS.NodeJS.LTS</code></pre></div>
+    <p class="i" data-de="Oder den LTS-Installer von nodejs.org laden. Danach PowerShell schließen, neu öffnen und prüfen:">Or download the LTS installer from nodejs.org. Then close and reopen PowerShell and check:</p>
+    <div class="cb"><button class="cp">Copy</button><pre><code>node -v
+npm -v</code></pre></div>
+    <h3 class="i" data-de="2. Entpacken und starten">2. Unpack and start</h3>
+    <div class="cb"><button class="cp">Copy</button><pre><code>Expand-Archive steam-slop.zip .
+cd steam-slop
+npm install
+npm run dev</code></pre></div>
+    <p class="i" data-de="Öffnen: <code>http://localhost:3000</code>. Meldet PowerShell, dass die Skriptausführung deaktiviert ist:">Open <code>http://localhost:3000</code>. If PowerShell says running scripts is disabled:</p>
+    <div class="cb"><button class="cp">Copy</button><pre><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></pre></div>
+    <h3 class="i" data-de="3. Stoppen">3. Stop</h3>
+    <p class="i" data-de="<code>Ctrl+C</code> im Terminal. Läuft es noch im Hintergrund:">Press <code>Ctrl+C</code> in the terminal. If it still runs in the background:</p>
+    <div class="cb"><button class="cp">Copy</button><pre><code>netstat -ano | findstr :3000
+taskkill /PID &lt;PID&gt; /F</code></pre></div>
+  </div>
+
+  <h3 class="i" data-de="Produktionsmodus (beide Systeme)" style="font-size:14px;margin:26px 0 6px">Production mode (both systems)</h3>
+  <div class="cb"><button class="cp">Copy</button><pre><code>npm run build
+npm run start</code></pre></div>
+  <div class="note"><b class="i" data-de="Große Datei:">Large file:</b> <span class="i" data-de="Der ausgelieferte Build ist größer als 100 MB und liegt bei pCloud statt auf GitHub. Es gibt keine veröffentlichte Prüfsumme, die Datei lässt sich also nicht verifizieren. Öffne sie zuerst in einer VM, scanne sie, oder baue lieber aus dem Quellcode (git clone).">The distributed build is over 100 MB and is hosted on pCloud, not on GitHub. No checksum is published, so the file cannot be verified. Open it in a VM first, scan it, or build from source (<code>git clone</code>) instead.</span></div>
+  <div class="note"><b class="i" data-de="Vor dem Start prüfen:">Check before running:</b> <span class="i" data-de="Das Projekt ist laut README vollständig KI-generiert. Sieh dir package.json und die Abhängigkeiten an, bevor du npm install ausführst, denn Install-Skripte laufen mit deinen Rechten.">The README states the project is fully AI-generated. Read <code>package.json</code> and the dependencies before <code>npm install</code>, because install scripts run with your privileges.</span></div>
+</section>
+
+<section id="credits" class="s">
+  <h2>Credits</h2>
+  <p class="i" data-de="Erstellt von marcel533. Spieldaten und Bilder gehören Valve, Steam und den jeweiligen Entwicklern. Nicht mit Valve verbunden.">Created by marcel533. Game data and images belong to Valve, Steam and the respective developers. Not affiliated with Valve.</p>
+</section>
+</main>
+</div>
+<footer>© marcel533 · Steam Slop</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+// language toggle: default text is English, German lives in data-de
+document.querySelectorAll(".i").forEach(function(e){ e.setAttribute("data-en", e.innerHTML); });
+function setLang(l){
+  document.documentElement.lang = l;
+  document.querySelectorAll(".i").forEach(function(e){ e.innerHTML = e.getAttribute("data-" + l); });
+  document.querySelectorAll(".lang button").forEach(function(b){ b.classList.toggle("on", b.dataset.l === l); });
+  document.querySelectorAll(".cp").forEach(function(b){ b.textContent = l === "de" ? "Kopieren" : "Copy"; });
+  try{ localStorage.setItem("lang", l); }catch(e){}
+}
+document.querySelectorAll(".lang button").forEach(function(b){ b.addEventListener("click", function(){ setLang(b.dataset.l); if(window.ScrollTrigger) ScrollTrigger.refresh(); }); });
+var saved = null; try{ saved = localStorage.getItem("lang"); }catch(e){}
+if(saved === "de" || (!saved && (navigator.language || "").slice(0,2) === "de")) setLang("de");
+
+document.querySelectorAll(".cp").forEach(function(b){
+  b.addEventListener("click", function(){
+    var de = document.documentElement.lang === "de";
+    try{ navigator.clipboard.writeText(b.parentNode.querySelector("pre").innerText); b.textContent = de ? "Kopiert" : "Copied"; }catch(e){ b.textContent = "–"; }
+    setTimeout(function(){ b.textContent = de ? "Kopieren" : "Copy"; }, 1400);
+  });
+});
+
+// scroll spy
+var links = [].slice.call(document.querySelectorAll("#nav a"));
+var secs = links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+function spy(){ var y = window.scrollY + 110, c = 0; secs.forEach(function(s,i){ if(s.offsetTop <= y) c = i; }); links.forEach(function(a,i){ a.classList.toggle("on", i === c); }); }
+window.addEventListener("scroll", spy); spy();
+
+// GSAP: hero reveal + section reveal on scroll. Skipped with reduced motion; content is visible by default if GSAP fails to load.
+if(window.gsap && window.ScrollTrigger){
+  gsap.registerPlugin(ScrollTrigger);
+  var mm = gsap.matchMedia();
+  mm.add("(prefers-reduced-motion: no-preference)", function(){
+    gsap.timeline({ defaults:{ duration:.5, ease:"power2.out" } })
+      .from("#top h1", { y:16, opacity:0 })
+      .from("#top .lead", { y:12, opacity:0 }, "-=0.3")
+      .from("#top .row .btn", { y:10, opacity:0, stagger:.06 }, "-=0.3");
+    gsap.utils.toArray(".s:not(#top)").forEach(function(s){
+      gsap.from(s, { y:20, opacity:0, duration:.5, ease:"power2.out", scrollTrigger:{ trigger:s, start:"top 88%", once:true } });
+    });
+  });
+}
+// scroll progress bar
+(function(){ var b = document.getElementById("bar"); function p(){ var h = document.documentElement.scrollHeight - innerHeight; b.style.transform = "scaleX(" + (h > 0 ? Math.min(1, scrollY / h) : 0) + ")"; } addEventListener("scroll", p, { passive:true }); p(); })();
+
+// interactive score calculator (weights 40/30/30, n/a categories are skipped and the rest reweighted)
+(function(){
+  var rows = [].slice.call(document.querySelectorAll(".cr")), cur = { v:0 }, fill = document.getElementById("fill"), num = document.getElementById("num");
+  var has = !!window.gsap, rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function paint(){ num.textContent = Math.round(cur.v); fill.style.width = cur.v + "%"; }
+  function calc(){
+    var s = 0, w = 0;
+    rows.forEach(function(r){
+      var na = r.querySelector(".na input").checked, rg = r.querySelector("input[type=range]");
+      rg.disabled = na; r.querySelector("output").textContent = na ? "n/a" : rg.value + "%";
+      if(!na){ var k = +rg.dataset.w; s += rg.value * k; w += k; }
+    });
+    if(has) gsap.killTweensOf(cur);
+    if(!w){ cur.v = 0; paint(); num.textContent = "–"; return; }
+    var t = s / w;
+    if(has && !rm) gsap.to(cur, { v:t, duration:.45, ease:"power2.out", onUpdate:paint }); else { cur.v = t; paint(); }
+  }
+  function preset(v, na){ rows.forEach(function(r,i){ r.querySelector("input[type=range]").value = v[i]; r.querySelector(".na input").checked = !!na[i]; }); calc(); }
+  rows.forEach(function(r){ r.addEventListener("input", calc); });
+  document.getElementById("ex").onclick = function(){ preset([0,40,25],[1,0,0]); };
+  document.getElementById("rs").onclick = function(){ preset([0,0,0],[0,0,0]); };
+  if(window.ScrollTrigger && !rm) ScrollTrigger.create({ trigger:"#try", start:"top 80%", once:true, onEnter:calc }); else calc();
+})();
+// hero scan illustration (R.E.P.O. = 33%, the README example)
+(function(){
+  var P = document.getElementById("pnl"), S = [].slice.call(P.querySelectorAll(".st")), H = document.getElementById("hn"), o = { v:0 }, tl = null;
+  var rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function fin(){ P.className = "panel done"; S.forEach(function(s){ s.className = "st d"; }); H.textContent = "33"; }
+  function play(){
+    if(!window.gsap || rm){ fin(); return; }
+    if(tl) tl.kill();
+    P.className = "panel run"; S.forEach(function(s){ s.className = "st w"; }); H.textContent = "–"; o.v = 0;
+    tl = gsap.timeline();
+    S.forEach(function(s,i){ tl.call(function(){ s.className = "st r"; }, null, i*.9 + .3).call(function(){ s.className = "st d"; }, null, i*.9 + 1.0); });
+    tl.to(o, { v:33, duration:.7, ease:"power2.out", onUpdate:function(){ H.textContent = Math.round(o.v); } }, 3.0)
+      .call(function(){ P.className = "panel done"; }, null, 3.8);
+  }
+  document.getElementById("rp").onclick = play;
+  setTimeout(play, 900);
+})();
+// OS tabs
+(function(){
+  var b = [].slice.call(document.querySelectorAll(".tabs button")), p = [].slice.call(document.querySelectorAll(".tp"));
+  function show(os){ b.forEach(function(x){ x.classList.toggle("on", x.dataset.os === os); }); p.forEach(function(x){ x.hidden = x.dataset.os !== os; }); if(window.ScrollTrigger) ScrollTrigger.refresh(); }
+  b.forEach(function(x){ x.addEventListener("click", function(){ show(x.dataset.os); }); });
+  if(/Win/i.test(navigator.userAgent || "")) show("win");
+})();
+</script>
+</body>
+</html>
