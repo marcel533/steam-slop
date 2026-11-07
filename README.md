@@ -39,12 +39,12 @@ Steam Slop is a web app that estimates how heavily a Steam game relies on AI-gen
 
 | Search & curated games | Game detail with slop score |
 |:---:|:---:|
-| <img src="demo-images/scan-repo.png" alt="Home page: search bar, recently viewed games and curated entries filtered by AI slop, Mixed or Legitimate" width="440"> | <img src="demo-images/Screenshot_20261028_203529.png" alt="Detail page for R.E.P.O. showing a 13% Legitimate slop score with breakdown and evidence" width="440"> |
+| <img src="demo-images/home.png" alt="Home page: search bar, recently viewed games and curated entries filtered by AI slop, Mixed or Legitimate" width="440"> | <img src="demo-images/scan-repo.png" alt="Detail page for R.E.P.O. showing a 13% Legitimate slop score with breakdown and evidence" width="440"> |
 | Search any Steam game or browse curated entries and filter them by verdict. | Score, per-category breakdown, evidence, community verdict and a link to Steam. |
 
 | Browse by tag | Watchlist |
 |:---:|:---:|
-| <img src="demo-images/watchlist.png" alt="Tag page with a button to rank the top 12 by slop score" width="440"> | <img src="demo-images/Screenshot_20261028_204927.png" alt="Empty watchlist page, saved only in the browser" width="440"> |
+| <img src="demo-images/tag.png" alt="Tag page with a button to rank the top 12 by slop score" width="440"> | <img src="demo-images/watchlist.png" alt="Empty watchlist page, saved only in the browser" width="440"> |
 | Tag data from SteamSpy, sorted by positive reviews. Rank the top 12 by slop score with one click. | Games you saved with the heart icon. Stored only in your browser. |
 
 ### Features
@@ -159,12 +159,12 @@ Steam Slop ist eine Web-App, die abschätzt, wie stark ein Steam-Spiel auf KI-ge
 
 | Suche & kuratierte Spiele | Spieldetail mit Slop-Score |
 |:---:|:---:|
-| <img src="demo-images/scan-repo.png" alt="Startseite: Suchleiste, zuletzt angesehene Spiele und kuratierte Einträge, gefiltert nach AI Slop, Mixed oder Legitimate" width="440"> | <img src="demo-images/Screenshot_20261028_203529.png" alt="Detailseite zu R.E.P.O. mit 13 % Slop-Score (Legitimate), Aufschlüsselung und Belegen" width="440"> |
+| <img src="demo-images/home.png" alt="Startseite: Suchleiste, zuletzt angesehene Spiele und kuratierte Einträge, gefiltert nach AI Slop, Mixed oder Legitimate" width="440"> | <img src="demo-images/scan-repo.png" alt="Detailseite zu R.E.P.O. mit 13 % Slop-Score (Legitimate), Aufschlüsselung und Belegen" width="440"> |
 | Suche jedes Steam-Spiel oder stöbere in kuratierten Einträgen und filtere sie nach Urteil. | Score, Aufschlüsselung pro Kategorie, Belege, Community-Urteil und ein Link zu Steam. |
 
 | Nach Tags stöbern | Merkliste |
 |:---:|:---:|
-| <img src="demo-images/watchlist.png" alt="Tag-Seite mit Button, um die Top 12 nach Slop-Score zu sortieren" width="440"> | <img src="demo-images/Screenshot_20261028_204927.png" alt="Leere Merkliste, nur im Browser gespeichert" width="440"> |
+| <img src="demo-images/tag.png" alt="Tag-Seite mit Button, um die Top 12 nach Slop-Score zu sortieren" width="440"> | <img src="demo-images/watchlist.png" alt="Leere Merkliste, nur im Browser gespeichert" width="440"> |
 | Tag-Daten von SteamSpy, sortiert nach positiven Bewertungen. Sortiere die Top 12 per Klick nach Slop-Score. | Spiele, die du mit dem Herz-Symbol gespeichert hast. Nur in deinem Browser gespeichert. |
 
 ### Funktionen
