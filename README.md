@@ -39,7 +39,7 @@ Steam Slop is a web app that estimates how heavily a Steam game relies on AI-gen
 
 | Search & curated games | Game detail with slop score |
 |:---:|:---:|
-| <img src="demo-images/home.png" alt="Home page: search bar, recently viewed games and curated entries filtered by AI slop, Mixed or Legitimate" width="380"> | <img src="demo-images/scan-repo.png" alt="Detail page for R.E.P.O. showing a 13% Legitimate slop score with breakdown and evidence" width="380"> |
+| <img src="demo-images/home.png" alt="Home page: search bar, recently viewed games and curated entries filtered by AI slop, Mixed or Legitimate" width="380"> | <img src="demo-images/scan-repo.png" alt="Detail page for R.E.P.O. showing a 33% Legitimate slop score with breakdown and evidence" width="380"> |
 | Search any Steam game or browse curated entries and filter them by verdict. | Score, per-category breakdown, evidence, community verdict and a link to Steam. |
 
 | Browse by tag | Watchlist |
@@ -56,6 +56,9 @@ Steam Slop is a web app that estimates how heavily a Steam game relies on AI-gen
 | **Breakdown** | Per-category detail for store/capsule graphics, descriptions & patch notes, and asset-flip signals. |
 | **Evidence list** | The specific signals that produced the score. |
 | **Community verdict** | Votes, example quotes and tags (curated entries only). You can also set your own verdict, which is saved only in your browser. |
+| **Developer history** | On request, checks the developer's other games (runs several Steam requests, so only when you ask). |
+| **Score history** | Tracks how a game's score changes over time. |
+| **Share, copy link & print** | Share the score, copy a link to the report, or print it. |
 | **Tag browsing** | Browse games by Steam tag (data from SteamSpy) and rank the top 12 by slop score. |
 | **Watchlist & compare** | Save games to a watchlist and compare them side by side. |
 | **Steam events banner** | Shows the current and upcoming Steam sales and fests. |
@@ -69,17 +72,18 @@ Entries come from two sources:
 1. **Curated entries** (home page): scored from publicly known information, such as AI usage disclosed by the developer.
 2. **Every other Steam game**: automatically estimated from public store data.
 
-The overall score is a weighted average of the measurable categories.
+The overall score is a weighted average of the measurable categories. Categories that read `n/a` are left out and the remaining weights are rescaled.
 
 | Category | Weight | Notes |
 |---|:---:|---|
 | Store & capsule graphics | 40% | Images are **not** analysed, so this reads `n/a` unless the developer explicitly disclosed AI use. |
-| Store text & patch notes | 30% | Looks for LLM-typical phrasing. |
+| Store text & patch notes | 30% | Looks for LLM-typical phrasing and mentions of AI-generated content. |
 | Asset flips | 30% | Indicators of reused or repackaged assets. |
 
 For non-curated games, the estimate draws on:
 
 - LLM-typical phrasing in the store description
+- Developer news or patch notes mentioning AI-generated content
 - No developer website or support contact
 - Very few user reviews
 - An unusually low price
@@ -92,11 +96,13 @@ For non-curated games, the estimate draws on:
 
 <img src="demo-images/scan-repo.png" alt="R.E.P.O. detail page" width="800">
 
-- Store art: `n/a` (images are not analysed)
-- Descriptions and patch notes: 0%
+- Store art: `n/a` (images are not analysed, so this category is left out)
+- Descriptions and patch notes: 40%
 - Asset flip signals: 25%
-- No developer website listed, so the evidence section flags it
-- Result: **13% – Legitimate**
+- Two signals raised: no developer website listed, and developer news or patch notes mention AI-generated content
+- Calculation: (30 × 40 + 30 × 25) / 60 = 32.5, shown as 33%
+- Result: **33% – Legitimate**
+- The review data source was unreachable, so the page shows a warning that the score may be incomplete
 
 </details>
 
@@ -104,6 +110,7 @@ For non-curated games, the estimate draws on:
 
 - The score is an indicator, not proof.
 - Store art is not measured unless the developer disclosed AI use.
+- If a data source (for example reviews) is unreachable, the score may be incomplete and the page says so.
 - Community-contributed data exists only for curated entries; real community reporting would require a dedicated database.
 
 ### Tech stack
@@ -159,7 +166,7 @@ Steam Slop ist eine Web-App, die abschätzt, wie stark ein Steam-Spiel auf KI-ge
 
 | Suche & kuratierte Spiele | Spieldetail mit Slop-Score |
 |:---:|:---:|
-| <img src="demo-images/home.png" alt="Startseite: Suchleiste, zuletzt angesehene Spiele und kuratierte Einträge, gefiltert nach AI Slop, Mixed oder Legitimate" width="380"> | <img src="demo-images/scan-repo.png" alt="Detailseite zu R.E.P.O. mit 13 % Slop-Score (Legitimate), Aufschlüsselung und Belegen" width="380"> |
+| <img src="demo-images/home.png" alt="Startseite: Suchleiste, zuletzt angesehene Spiele und kuratierte Einträge, gefiltert nach AI Slop, Mixed oder Legitimate" width="380"> | <img src="demo-images/scan-repo.png" alt="Detailseite zu R.E.P.O. mit 33 % Slop-Score (Legitimate), Aufschlüsselung und Belegen" width="380"> |
 | Suche jedes Steam-Spiel oder stöbere in kuratierten Einträgen und filtere sie nach Urteil. | Score, Aufschlüsselung pro Kategorie, Belege, Community-Urteil und ein Link zu Steam. |
 
 | Nach Tags stöbern | Merkliste |
@@ -176,6 +183,9 @@ Steam Slop ist eine Web-App, die abschätzt, wie stark ein Steam-Spiel auf KI-ge
 | **Aufschlüsselung** | Details pro Kategorie für Store-/Capsule-Grafiken, Beschreibungen & Patch-Notes sowie Asset-Flip-Signale. |
 | **Belegliste** | Die konkreten Signale, aus denen sich der Score ergibt. |
 | **Community-Urteil** | Stimmen, Beispielzitate und Tags (nur kuratierte Einträge). Du kannst auch dein eigenes Urteil setzen, das nur in deinem Browser gespeichert wird. |
+| **Entwickler-Historie** | Prüft auf Anfrage die weiteren Spiele des Entwicklers (mehrere Steam-Anfragen, daher nur auf Klick). |
+| **Score-Verlauf** | Zeigt, wie sich der Score eines Spiels über die Zeit verändert. |
+| **Teilen, Link kopieren & Drucken** | Score teilen, Link zum Bericht kopieren oder den Bericht drucken. |
 | **Tag-Browser** | Stöbere nach Steam-Tags (Daten von SteamSpy) und sortiere die Top 12 nach Slop-Score. |
 | **Merkliste & Vergleich** | Speichere Spiele in einer Merkliste und vergleiche sie nebeneinander. |
 | **Steam-Events-Banner** | Zeigt aktuelle und kommende Steam-Sales und -Festivals. |
@@ -189,17 +199,18 @@ Die Einträge stammen aus zwei Quellen:
 1. **Kuratierte Einträge** (Startseite): bewertet anhand öffentlich bekannter Informationen, etwa vom Entwickler offengelegter KI-Nutzung.
 2. **Alle anderen Steam-Spiele**: automatisch aus öffentlichen Store-Daten geschätzt.
 
-Der Gesamtscore ist ein gewichteter Durchschnitt der messbaren Kategorien.
+Der Gesamtscore ist ein gewichteter Durchschnitt der messbaren Kategorien. Kategorien mit `n/a` werden weggelassen und die übrigen Gewichte entsprechend hochgerechnet.
 
 | Kategorie | Gewicht | Hinweise |
 |---|:---:|---|
 | Store- & Capsule-Grafiken | 40 % | Bilder werden **nicht** analysiert, daher steht hier `n/a`, außer der Entwickler hat KI-Nutzung ausdrücklich offengelegt. |
-| Store-Texte & Patch-Notes | 30 % | Sucht nach LLM-typischen Formulierungen. |
+| Store-Texte & Patch-Notes | 30 % | Sucht nach LLM-typischen Formulierungen und Erwähnungen KI-generierter Inhalte. |
 | Asset-Flips | 30 % | Hinweise auf wiederverwendete oder neu verpackte Assets. |
 
 Bei nicht kuratierten Spielen stützt sich die Schätzung auf:
 
 - LLM-typische Formulierungen in der Store-Beschreibung
+- Entwickler-News oder Patch-Notes, die KI-generierte Inhalte erwähnen
 - Keine Entwickler-Website bzw. kein Support-Kontakt
 - Sehr wenige Nutzerbewertungen
 - Ein ungewöhnlich niedriger Preis
@@ -212,11 +223,13 @@ Bei nicht kuratierten Spielen stützt sich die Schätzung auf:
 
 <img src="demo-images/scan-repo.png" alt="Detailseite zu R.E.P.O." width="800">
 
-- Store-Grafiken: `n/a` (Bilder werden nicht analysiert)
-- Beschreibungen und Patch-Notes: 0 %
+- Store-Grafiken: `n/a` (Bilder werden nicht analysiert, die Kategorie entfällt)
+- Beschreibungen und Patch-Notes: 40 %
 - Asset-Flip-Signale: 25 %
-- Keine Entwickler-Website angegeben, daher wird das in den Belegen markiert
-- Ergebnis: **13 % – Legitimate**
+- Zwei Signale: keine Entwickler-Website angegeben und Entwickler-News bzw. Patch-Notes erwähnen KI-generierte Inhalte
+- Rechnung: (30 × 40 + 30 × 25) / 60 = 32,5, angezeigt als 33 %
+- Ergebnis: **33 % – Legitimate**
+- Die Review-Datenquelle war nicht erreichbar, daher zeigt die Seite die Warnung, dass der Score unvollständig sein kann
 
 </details>
 
@@ -224,6 +237,7 @@ Bei nicht kuratierten Spielen stützt sich die Schätzung auf:
 
 - Der Score ist ein Indikator, kein Beweis.
 - Store-Grafiken werden nicht bewertet, außer der Entwickler hat KI-Nutzung offengelegt.
+- Ist eine Datenquelle (z. B. Reviews) nicht erreichbar, kann der Score unvollständig sein; die Seite weist darauf hin.
 - Von der Community beigesteuerte Daten gibt es nur für kuratierte Einträge; echte Community-Meldungen würden eine eigene Datenbank erfordern.
 
 ### Technologie-Stack
